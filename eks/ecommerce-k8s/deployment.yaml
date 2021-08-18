@@ -1,0 +1,178 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: ecommerce
+  name: order-receiver
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: order-receiver
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: order-receiver
+    spec:
+      containers:
+      - image: robsonbittencourt/order-receiver
+        imagePullPolicy: Always
+        name: order-receiver
+        envFrom:
+          - secretRef:
+              name: external-hosts
+        ports:
+        - containerPort: 8080
+      volumes:
+        - name: external-hosts
+          secret:
+            secretName: external-hosts
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: ecommerce
+  name: logistics
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: logistics
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: logistics
+    spec:
+      containers:
+      - image: robsonbittencourt/logistics
+        imagePullPolicy: Always
+        name: logistics
+        envFrom:
+          - secretRef:
+              name: external-hosts
+        ports:
+        - containerPort: 8080
+      volumes:
+        - name: external-hosts
+          secret:
+            secretName: external-hosts  
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: ecommerce
+  name: order-processor
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: order-processor
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: order-processor
+    spec:
+      containers:
+      - image: robsonbittencourt/order-processor
+        imagePullPolicy: Always
+        name: order-processor
+        envFrom:
+          - secretRef:
+              name: external-hosts
+        ports:
+        - containerPort: 8080
+      volumes:
+        - name: external-hosts
+          secret:
+            secretName: external-hosts
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: ecommerce
+  name: payments
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: payments
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: payments
+    spec:
+      containers:
+      - image: robsonbittencourt/payments
+        imagePullPolicy: Always
+        name: payments
+        envFrom:
+          - secretRef:
+              name: external-hosts
+        ports:
+        - containerPort: 8080
+      volumes:
+        - name: external-hosts
+          secret:
+            secretName: external-hosts
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: ecommerce
+  name: productviewer
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: productviewer
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: productviewer
+    spec:
+      containers:
+      - image: robsonbittencourt/productviewer
+        imagePullPolicy: Always
+        name: productviewer
+        envFrom:
+          - secretRef:
+              name: external-hosts
+        ports:
+        - containerPort: 8080
+      volumes:
+        - name: external-hosts
+          secret:
+            secretName: external-hosts
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: ecommerce
+  name: stock
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: stock
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: stock
+    spec:
+      containers:
+      - image: robsonbittencourt/stock
+        imagePullPolicy: Always
+        name: stock
+        envFrom:
+          - secretRef:
+              name: external-hosts
+        ports:
+        - containerPort: 8080
+      volumes:
+        - name: external-hosts
+          secret:
+            secretName: external-hosts  
