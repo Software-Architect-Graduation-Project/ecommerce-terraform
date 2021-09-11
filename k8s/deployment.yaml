@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: order-receiver
-  replicas: 1
+  replicas: 8
   template:
     metadata:
       labels:
@@ -37,7 +37,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: logistics
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -67,7 +67,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: order-processor
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -97,7 +97,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: payments
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -127,7 +127,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: productviewer
-  replicas: 1
+  replicas: 8
   template:
     metadata:
       labels:
@@ -157,7 +157,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: stock
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
