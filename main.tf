@@ -192,7 +192,7 @@ module "db" {
 
   engine            = "postgres"
   engine_version    = "11.10"
-  instance_class    = "db.m5.large" //"db.t3.micro" //"db.m5.large"
+  instance_class    = "db.t3.micro" //"db.m5.large"
   allocated_storage = 10
 
   name     = each.key
@@ -238,14 +238,14 @@ module "eks" {
   worker_groups = [
     {
       name                          = "worker-group-1"
-      instance_type                 = "m5.large" //t3.small
+      instance_type                 = "t3.small" //"m5.large" 
       additional_userdata           = "echo foo bar"
       asg_desired_capacity          = 2
       additional_security_group_ids = [aws_security_group.worker_group_mgmt_one.id]
     },
     {
       name                          = "worker-group-2"
-      instance_type                 = "m5.large" //t3.small
+      instance_type                 = "t3.small" //"m5.large"
       additional_userdata           = "echo foo bar"
       additional_security_group_ids = [aws_security_group.worker_group_mgmt_two.id]
       asg_desired_capacity          = 2
@@ -310,7 +310,7 @@ module "msk-cluster" {
   source  = "angelabad/msk-cluster/aws"
 
   cluster_name    = "ecommerce"
-  instance_type   = "kafka.m5.large" //"kafka.t3.small" //kafka.m5.large
+  instance_type   = "kafka.t3.small" //"kafka.m5.large"
   number_of_nodes = 3
   client_subnets  = module.vpc.private_subnets
   kafka_version   = "2.8.0"

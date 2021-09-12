@@ -26,7 +26,7 @@ helm upgrade -i aws-load-balancer-controller \
 
 kubectl apply -f k8s/namespace.yaml
 
-sleep 5
+sleep 20
 
 kubectl apply -f k8s/ingress.yaml
 
